@@ -4,7 +4,7 @@
     "empresa": "Vitacore Nutrition S.A. de C.V.",
     "eslogan": "Evolución absoluta.",
     "logotipo": {
-      "ruta": "./assets/images/logotipo.png",
+      "ruta": "https://github.com/CarlosCardenas30/Prueba-de-archivos-JSON/blob/main/assets/images/logotipo.jpeg",
       "textoAlternativo": "Logotipo de la empresa."
     }
   },
