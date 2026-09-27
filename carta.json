@@ -18,5 +18,12 @@
     ],
     "despedida": "ATTE.",
     "remitente": "Carlos Cardenas"
+  },
+  "piePagina": {
+    "direccion": "Av. Principal 123, Col. Centro, Ciudad de México",
+    "telefono": "+52 55 1234 5678",
+    "email": "contacto@vitacore.com",
+    "web": "://vitacorenutrition.com"
   }
 }
+
