@@ -119,7 +119,6 @@
 
   <div class="carta-container">
     <header class="header-empresa">
-      <!-- Mantenemos el id="logo" idéntico para que JavaScript lo encuentre -->
       <img id="logo" class="logo" src="" alt="Cargando logotipo...">
       <h2 id="empresa" class="nombre-empresa"></h2>
       <p id="eslogan" class="eslogan-empresa"></p>
@@ -142,8 +141,7 @@
   </div>
 
   <script>
-    // Conexión limpia con tu archivo carta.json
-    fetch('carta.json')
+    fetch('carta.jso')
       .then(response => {
         if (!response.ok) {
           throw new Error('No se pudo cargar el archivo JSON');
