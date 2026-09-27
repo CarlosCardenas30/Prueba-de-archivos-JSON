@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- El título de la pestaña se actualizará dinámicamente -->
+  <title>Cargando...</title>
+  <style>
+    /* Estilos generales de la página */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Contenedor principal de la carta */
+    .carta-container {
+      background-color: #ffffff;
+      max-width: 650px;
+      width: 100%;
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      border-top: 6px solid #111827; /* Línea decorativa superior */
+    }
+
+    /* Encabezado: Logotipo y eslogan */
+    .header-empresa {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .logo {
+      max-height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .nombre-empresa {
+      font-size: 22px;
+      font-weight: 700;
+      color: #111827;
+      margin: 0;
+    }
+    .eslogan-empresa {
+      font-size: 14px;
+      color: #6b7280;
+      font-style: italic;
+      margin: 4px 0 0 0;
+    }
+
+    /* Datos del documento (Destinatario y Fecha) */
+    .meta-datos {
+      border-top: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 15px 0;
+      margin-bottom: 30px;
+      font-size: 14px;
+      color: #4b5563;
+      display: flex;
+      justify-content: space-between;
+    }
+    .meta-datos strong {
+      color: #111827;
+    }
+
+    /* Cuerpo del mensaje */
+    .saludo {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 20px;
+    }
+    .parrafo-contenido {
+      font-size: 16px;
+      color: #374151;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    /* Sección de firmas */
+    .firma-seccion {
+      margin-top: 50px;
+      text-align: right;
+      border-top: 1px dashed #e5e7eb;
+      padding-top: 20px;
+    }
+    .despedida {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+    .remitente {
+      font-size: 16px;
+      font-weight: 700;
+      color: #111827;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carta-container">
+    <!-- Bloque de Empresa -->
+    <header class="header-empresa">
+      <img id="logo" class="logo" src="" alt="Cargando logotipo...">
+      <h2 id="empresa" class="nombre-empresa"></h2>
+      <p id="eslogan" class="eslogan-empresa"></p>
+    </header>
+
+    <!-- Metadatos de la carta -->
+    <div class="meta-datos">
+      <div>Para: <strong id="destinatario"></strong></div>
+      <div>Fecha: <strong id="fecha"></strong></div>
+    </div>
+
+    <!-- Contenido de la carta -->
+    <main>
+      <div id="saludo" class="saludo"></div>
+      <div id="cuerpo-mensaje"></div>
+    </main>
+
+    <!-- Firma -->
+    <footer class="firma-seccion">
+      <div id="despedida" class="despedida"></div>
+      <div id="remitente" class="remitente"></div>
+    </footer>
+  </div>
+
+  <script>
+    fetch('carta.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('No se pudo cargar el archivo JSON');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // 1. Título de la pestaña del navegador
+        document.title = data.tituloPagina;
+
+        // 2. Cargar datos de la empresa
+        document.getElementById('logo').src = data.datosEmpresa.logotipo.ruta;
+        document.getElementById('logo').alt = data.datosEmpresa.logotipo.textoAlternativo;
+        document.getElementById('empresa').innerText = data.datosEmpresa.empresa;
+        document.getElementById('eslogan').innerText = data.datosEmpresa.eslogan;
+
+        // 3. Cargar datos de la carta
+        document.getElementById('destinatario').innerText = data.cartaBienvenida.destinatario;
+        document.getElementById('fecha').innerText = data.cartaBienvenida.fecha;
+        document.getElementById('saludo').innerText = data.cartaBienvenida.saludo;
+        document.getElementById('despedida').innerText = data.cartaBienvenida.despedida;
+        document.getElementById('remitente').innerText = data.cartaBienvenida.remitente;
+
+        // 4. Renderizar dinámicamente los párrafos del contenido
+        const cuerpoContainer = document.getElementById('cuerpo-mensaje');
+        data.cartaBienvenida.contenido.forEach(textoParrafo => {
+          const p = document.createElement('p');
+          p.className = 'parrafo-contenido';
+          p.innerText = textoParrafo;
+          cuerpoContainer.appendChild(p);
+        });
+      })
+      .catch(error => {
+        console.error('Error al procesar los datos:', error);
+        document.getElementById('cuerpo-mensaje').innerHTML = '<p style="color:red;">Error al cargar la información de la carta.</p>';
+      });
+  </script>
+</body>
+</html>
