@@ -1,0 +1,22 @@
+{
+  "tituloPagina": "Carta de bienvenida",
+  "datosEmpresa": {
+    "empresa": "Vitacore Nutrition S.A. de C.V.",
+    "eslogan": "Evolución absoluta.",
+    "logotipo": {
+      "ruta": "activos/imágenes/logotipo.jpeg",
+      "textoAlternativo": "Logotipo de la empresa."
+    }
+  },
+  "cartaBienvenida": {
+    "destinatario": "Jose Carlos Salas Cardenas",
+    "fecha": "28 de septiembre de 2026",
+    "saludo": "Estimado Jose Carlos,",
+    "contenido": [
+      "Nos complace darte la más cordial bienvenida a nuestra empresa.",
+      "Estamos seguros de que tu talento y compromiso serán clave para alcanzar grandes metas juntos."
+    ],
+    "despedida": "ATTE.",
+    "remitente": "Carlos Cardenas"
+  }
+}
